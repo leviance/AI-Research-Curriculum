@@ -114,52 +114,69 @@ For **H**, read the abstract/introduction and the historically important section
 
 # Prerequisite map
 
-```mermaid
-flowchart TD
-    P[Python] --> A[Algebra]
-    A --> LA[Linear Algebra]
-    A --> C[Calculus]
-    LA --> PR[Probability]
-    C --> PR
-    LA --> O[Optimization]
-    C --> O
+The curriculum is designed to be followed primarily in order. The main path is:
 
-    PR --> AI[Classical AI]
-    AI --> ML[Machine Learning]
-    O --> ML
-    PR --> ML
-
-    ML --> DL[Deep Learning]
-    DL --> SYS[Deep Learning Systems]
-    SYS --> CV[Computer Vision]
-    SYS --> NLP[Sequence Modeling]
-    CV --> FM[Foundation Models]
-    NLP --> FM
-
-    ML --> RL[Reinforcement Learning]
-    DL --> RL
-    RL --> FM
-
-    FM --> AG[Reasoning / Agents]
-    CV --> MM[Multimodal Learning]
-    FM --> MM
-    MM --> GEN[Flow / Diffusion]
-
-    LA --> ROB[Robotics Foundations]
-    C --> ROB
-    PR --> ROB
-    AI --> ROB
-
-    ROB --> RRL[Robot Learning]
-    RL --> RRL
-    GEN --> RRL
-    MM --> RRL
-
-    AG --> VLA[VLA / Embodied Foundation Models]
-    MM --> VLA
-    RRL --> VLA
-    VLA --> RES[Original Research]
+```text
+Preparation
+    ↓
+Mathematical Foundations
+    ↓
+Classical AI
+    ↓
+Machine Learning
+    ↓
+Deep Learning Foundations
+    ↓
+Deep Learning Systems
+    ↓
+Computer Vision + Sequence Modeling
+    ↓
+Reinforcement Learning
+    ↓
+Foundation Models / LLMs
+    ↓
+Reasoning & Agents + Multimodal Learning
+    ↓
+Flow Matching & Diffusion
+    ↓
+Robotics Foundations
+    ↓
+Robot Learning
+    ↓
+Vision-Language-Action Models
+    ↓
+Original Research
 ```
+
+`Requires` lists **direct prerequisite courses only**. `Unlocks` is the inverse relation: every item shown there is a course in this curriculum that directly depends on the current course. Follow the course codes to locate the prerequisite in the [Curriculum overview](#curriculum-overview).
+
+| Course | Requires | Unlocks |
+|---|---|---|
+| **PY-001 — Python for Scientific Computing** | — | AI-101 — Introduction to Artificial Intelligence<br>ML-201 — Machine Learning |
+| **MATH-000 — Algebra & Functions Refresher** | — | MATH-101 — Linear Algebra<br>MATH-102 — Calculus for ML |
+| **MATH-101 — Linear Algebra** | MATH-000 — Algebra & Functions Refresher | MATH-104 — Optimization for ML<br>AI-101 — Introduction to Artificial Intelligence<br>ROB-901 — Differential Equations & Mechanics Bridge |
+| **MATH-102 — Calculus for ML** | MATH-000 — Algebra & Functions Refresher | MATH-103 — Probability<br>MATH-104 — Optimization for ML<br>ROB-901 — Differential Equations & Mechanics Bridge |
+| **MATH-103 — Probability** | MATH-102 — Calculus for ML | AI-101 — Introduction to Artificial Intelligence<br>ML-201 — Machine Learning<br>GEN-801 — Flow Matching and Diffusion Models |
+| **MATH-104 — Optimization for ML** | MATH-101 — Linear Algebra<br>MATH-102 — Calculus for ML | ML-201 — Machine Learning |
+| **AI-101 — Introduction to Artificial Intelligence** | PY-001 — Python for Scientific Computing<br>MATH-101 — Linear Algebra<br>MATH-103 — Probability | RL-501 — Reinforcement Learning |
+| **ML-201 — Machine Learning** | PY-001 — Python for Scientific Computing<br>MATH-103 — Probability<br>MATH-104 — Optimization for ML | DL-301 — Deep Learning Foundations<br>RL-501 — Reinforcement Learning |
+| **DL-301 — Deep Learning Foundations** | ML-201 — Machine Learning | SYS-302 — Deep Learning Systems<br>GEN-801 — Flow Matching and Diffusion Models |
+| **SYS-302 — Deep Learning Systems** | DL-301 — Deep Learning Foundations | CV-401 — Deep Learning for Computer Vision<br>NLP-402 — NLP / Sequence Modeling<br>RL-501 — Reinforcement Learning |
+| **CV-401 — Deep Learning for Computer Vision** | SYS-302 — Deep Learning Systems | MM-702 — Multimodal Machine Learning |
+| **NLP-402 — NLP / Sequence Modeling** | SYS-302 — Deep Learning Systems | FM-601 — Language Modeling from Scratch |
+| **RL-501 — Reinforcement Learning** | AI-101 — Introduction to Artificial Intelligence<br>ML-201 — Machine Learning<br>SYS-302 — Deep Learning Systems | FM-601 — Language Modeling from Scratch<br>AG-701 — Self-Improving AI Agents<br>RRL-1001 — Deep RL / Robot Learning |
+| **FM-601 — Language Modeling from Scratch** | NLP-402 — NLP / Sequence Modeling<br>RL-501 — Reinforcement Learning | FM-602 — Modern Architecture Lab<br>AG-701 — Self-Improving AI Agents<br>MM-702 — Multimodal Machine Learning |
+| **FM-602 — Modern Architecture Lab** | FM-601 — Language Modeling from Scratch | — |
+| **AG-701 — Self-Improving AI Agents** | FM-601 — Language Modeling from Scratch<br>RL-501 — Reinforcement Learning | VLA-1101 — Embodied Foundation Model Practicum |
+| **MM-702 — Multimodal Machine Learning** | CV-401 — Deep Learning for Computer Vision<br>FM-601 — Language Modeling from Scratch | VLA-1101 — Embodied Foundation Model Practicum |
+| **GEN-801 — Flow Matching and Diffusion Models** | MATH-103 — Probability<br>DL-301 — Deep Learning Foundations | VLA-1101 — Embodied Foundation Model Practicum |
+| **ROB-901 — Differential Equations & Mechanics Bridge** | MATH-101 — Linear Algebra<br>MATH-102 — Calculus for ML | ROB-902 — Modern Robotics |
+| **ROB-902 — Modern Robotics** | ROB-901 — Differential Equations & Mechanics Bridge | ROB-903 — Underactuated Robotics |
+| **ROB-903 — Underactuated Robotics** | ROB-902 — Modern Robotics | ROB-904 — Robotic Manipulation |
+| **ROB-904 — Robotic Manipulation** | ROB-903 — Underactuated Robotics | RRL-1001 — Deep RL / Robot Learning |
+| **RRL-1001 — Deep RL / Robot Learning** | RL-501 — Reinforcement Learning<br>ROB-904 — Robotic Manipulation | VLA-1101 — Embodied Foundation Model Practicum |
+| **VLA-1101 — Embodied Foundation Model Practicum** | AG-701 — Self-Improving AI Agents<br>MM-702 — Multimodal Machine Learning<br>GEN-801 — Flow Matching and Diffusion Models<br>RRL-1001 — Deep RL / Robot Learning | RES-1201 — Original Research |
+| **RES-1201 — Original Research** | VLA-1101 — Embodied Foundation Model Practicum | — |
 
 ---
 
@@ -250,9 +267,9 @@ Build a small set of connected environments rather than four unrelated demos. St
 
 # 3. Machine learning
 
-| Code | Course | Primary resource | Companion | Duration | Project |
-|---|---|---|---|---:|---|
-| ML-201 | Machine Learning | [Stanford CS229 notes](https://cs229.stanford.edu/notes2020spring/) and current topic sequence | [Probabilistic Machine Learning: An Introduction](https://probml.github.io/book1) | 12 weeks | `09-ml-from-first-principles` |
+| Code | Course | Primary resource | Companion | Duration | Prerequisites | Project |
+|---|---|---|---|---:|---|---|
+| ML-201 | Machine Learning | [Stanford CS229 notes](https://cs229.stanford.edu/notes2020spring/) and current topic sequence | [Probabilistic Machine Learning: An Introduction](https://probml.github.io/book1) | 12 weeks | PY-001, MATH-103, MATH-104 | `09-ml-from-first-principles` |
 
 Study linear and logistic regression, GLMs, regularization, bias/variance, model selection, generative/discriminative learning, Naive Bayes, Gaussian discriminant analysis, k-means, Gaussian mixtures, EM, PCA, and basic learning-theory intuition. Learn kernel/SVM ideas conceptually without spending disproportionate time on them.
 
@@ -265,10 +282,10 @@ Using NumPy, implement linear regression with closed-form and gradient-descent s
 
 ## Courses
 
-| Code | Course | Primary resource | Companion | Duration | Project |
-|---|---|---|---|---:|---|
-| DL-301 | Deep Learning Foundations | [Understanding Deep Learning](https://udlbook.github.io/udlbook/) | Bishop & Bishop, *Deep Learning: Foundations and Concepts* | 8 weeks | `10-neural-nets-from-numpy` |
-| SYS-302 | Deep Learning Systems | [CMU 10-414/714 — Fall 2026](https://dlsyscourse.org/) | [Course assignments](https://dlsyscourse.org/assignments/) | 14 weeks | `11-mini-pytorch` |
+| Code | Course | Primary resource | Companion | Duration | Prerequisites | Project |
+|---|---|---|---|---:|---|---|
+| DL-301 | Deep Learning Foundations | [Understanding Deep Learning](https://udlbook.github.io/udlbook/) | Bishop & Bishop, *Deep Learning: Foundations and Concepts* | 8 weeks | ML-201 | `10-neural-nets-from-numpy` |
+| SYS-302 | Deep Learning Systems | [CMU 10-414/714 — Fall 2026](https://dlsyscourse.org/) | [Course assignments](https://dlsyscourse.org/assignments/) | 14 weeks | DL-301 | `11-mini-pytorch` |
 
 ### DL-301 — Deep Learning Foundations
 
@@ -298,8 +315,8 @@ Build the course framework progressively from tensor storage and a computation g
 
 | Code | Course | Primary resource | Duration | Prerequisites | Project |
 |---|---|---|---:|---|---|
-| CV-401 | Deep Learning for Computer Vision | [Stanford CS231n — Spring 2026](https://cs231n.stanford.edu/) | 10 weeks | DL-301, SYS-302 | `12-vision-evolution` |
-| NLP-402 | NLP / Sequence Modeling | [Stanford CS224N](https://web.stanford.edu/class/cs224n/) | 8 weeks | DL-301, SYS-302 | `13-sequence-evolution` |
+| CV-401 | Deep Learning for Computer Vision | [Stanford CS231n — Spring 2026](https://cs231n.stanford.edu/) | 10 weeks | SYS-302 | `12-vision-evolution` |
+| NLP-402 | NLP / Sequence Modeling | [Stanford CS224N](https://web.stanford.edu/class/cs224n/) | 8 weeks | SYS-302 | `13-sequence-evolution` |
 
 ### CV-401 — Computer Vision
 
@@ -338,9 +355,9 @@ Train a character n-gram model, vanilla RNN, LSTM/GRU, attention-based encoder-d
 
 # 6. Reinforcement learning
 
-| Code | Course | Primary resource | Companion | Duration | Project |
-|---|---|---|---|---:|---|
-| RL-501 | Reinforcement Learning | [Stanford CS234 — Winter 2026](https://web.stanford.edu/class/cs234/) | Sutton & Barto, *Reinforcement Learning: An Introduction* | 10 weeks | `14-rl-lab` |
+| Code | Course | Primary resource | Companion | Duration | Prerequisites | Project |
+|---|---|---|---|---:|---|---|
+| RL-501 | Reinforcement Learning | [Stanford CS234 — Winter 2026](https://web.stanford.edu/class/cs234/) | Sutton & Barto, *Reinforcement Learning: An Introduction* | 10 weeks | AI-101, ML-201, SYS-302 | `14-rl-lab` |
 
 Study bandits, MDPs, Bellman equations, dynamic programming, Monte Carlo, TD learning, Q-learning, function approximation, policy gradients, actor-critic, DQN, PPO, exploration, imitation learning, offline RL, introductory RLHF, and MCTS.
 
@@ -363,7 +380,7 @@ Implement tabular Q-learning, REINFORCE, actor-critic, DQN, and PPO in a common 
 
 | Code | Course | Primary resource | Duration | Prerequisites | Project |
 |---|---|---|---:|---|---|
-| FM-601 | Language Modeling from Scratch | [Stanford CS336 — Spring 2026](https://cs336.stanford.edu/) | 16 weeks | SYS-302, NLP-402, RL-501 | `15-mini-foundation-model` |
+| FM-601 | Language Modeling from Scratch | [Stanford CS336 — Spring 2026](https://cs336.stanford.edu/) | 16 weeks | NLP-402, RL-501 | `15-mini-foundation-model` |
 | FM-602 | Modern Architecture Lab | Selected papers + official technical reports | 8 weeks | FM-601 | `16-k3-mini` |
 
 ### FM-601 — Language Modeling from Scratch
@@ -402,10 +419,10 @@ Start from the dense Transformer built in FM-601 and add a small sparse MoE, one
 
 # 8. Reasoning, agents, and multimodal learning
 
-| Code | Course | Primary resource | Companion | Duration | Project |
-|---|---|---|---|---:|---|
-| AG-701 | Self-Improving AI Agents | [Stanford CS329A](https://cs329a.stanford.edu/) | [Berkeley Advanced LLM Agents](https://rdi.berkeley.edu/adv-llm-agents/sp25) | 8 weeks | `17-agent-lab` |
-| MM-702 | Multimodal Machine Learning | [CMU 11-777 — Fall 2026](https://multicomp.cs.cmu.edu/mmml-course/fall2026/) | CS231n multimodal material | 10 weeks | `18-mini-vlm` |
+| Code | Course | Primary resource | Companion | Duration | Prerequisites | Project |
+|---|---|---|---|---:|---|---|
+| AG-701 | Self-Improving AI Agents | [Stanford CS329A](https://cs329a.stanford.edu/) | [Berkeley Advanced LLM Agents](https://rdi.berkeley.edu/adv-llm-agents/sp25) | 8 weeks | FM-601, RL-501 | `17-agent-lab` |
+| MM-702 | Multimodal Machine Learning | [CMU 11-777 — Fall 2026](https://multicomp.cs.cmu.edu/mmml-course/fall2026/) | CS231n multimodal material | 10 weeks | CV-401, FM-601 | `18-mini-vlm` |
 
 ### AG-701 — Reasoning & Agents
 
@@ -501,9 +518,9 @@ Build a simulated pick-and-place system whose pipeline runs from RGB/state obser
 
 # 11. Robot learning
 
-| Code | Course | Primary resource | Reference | Duration | Project |
-|---|---|---|---|---:|---|
-| RRL-1001 | Deep RL / Robot Learning | [Stanford CS224R — Spring 2026](https://cs224r.stanford.edu/) | [Berkeley CS285](https://rll.berkeley.edu/deeprlcourse/) | 12 weeks | `24-robot-learning` |
+| Code | Course | Primary resource | Reference | Duration | Prerequisites | Project |
+|---|---|---|---|---:|---|---|
+| RRL-1001 | Deep RL / Robot Learning | [Stanford CS224R — Spring 2026](https://cs224r.stanford.edu/) | [Berkeley CS285](https://rll.berkeley.edu/deeprlcourse/) | 12 weeks | RL-501, ROB-904 | `24-robot-learning` |
 
 Study behavioral cloning, DAgger, policy gradients, actor-critic, PPO, SAC, Q-learning, offline RL, model-based RL, goal-conditioned learning, skill discovery, and generative action prediction.
 
@@ -539,7 +556,7 @@ There is no single stable textbook for embodied foundation models. This stage is
 ### VLA-1101 — Embodied Foundation Model Practicum
 
 **Duration:** 18 weeks  
-**Prerequisites:** MM-702, GEN-801, ROB-904, RRL-1001
+**Prerequisites:** AG-701, MM-702, GEN-801, RRL-1001
 
 Study the progression from RT-style action representations through Open X-Embodiment, OpenVLA, flow-based action heads, π0/π0.5-style policies, cross-embodiment training, heterogeneous data mixtures, and long-horizon embodied reasoning. Focus on the design choices for visual representation, language conditioning, proprioception, action representation, action chunks, cross-embodiment transfer, real-time inference, and closed-loop correction.
 
@@ -559,6 +576,8 @@ Build a small VLA policy in simulation that maps camera images, language instruc
 ---
 
 # 13. Research phase
+
+**Prerequisite:** VLA-1101
 
 After the core curriculum, work becomes paper-driven rather than course-driven. Revisit Turing (1950) once at this stage; the same text should read differently after building learning systems, agents, and embodied policies.
 
