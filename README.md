@@ -2,7 +2,7 @@
 
 > An OSSU-style curriculum for self-taught AI research, from mathematical foundations to Foundation Models, Agents, and Robotics AI.
 
-**Version:** 2026.10  
+**Version:** 2026.10 — Annotated Canonical Literature Track  
 **Workload:** 10 hours/week  
 **Core duration:** ~4.5–5 years  
 **Primary language:** Python  
@@ -31,7 +31,7 @@
 - [12. Vision-Language-Action models](#12-vision-language-action-models)
 - [13. Research phase](#13-research-phase)
 - [Electives](#electives)
-- [Anchor papers](#anchor-papers)
+- [Canonical literature index](#canonical-literature-index)
 - [Project standard](#project-standard)
 - [Compute](#compute)
 - [Graduation criteria](#graduation-criteria)
@@ -97,6 +97,18 @@ For serious experiments, write the expected outcome before running the experimen
 | **Companion** | Read selectively when extra explanation is useful |
 | **Reference** | Consult for specific topics |
 | **Elective** | Optional specialization |
+
+### Paper labels
+
+Canonical papers are embedded inside the course where their prerequisites are first satisfied. They are not a separate chronological reading track. The **Summary & significance** column states what each work introduced, why it mattered historically, and why it is worth reading at that point in the curriculum.
+
+| Label | Meaning |
+|---|---|
+| **H — Historical** | Read for the origin of an idea and the problem it introduced or reframed |
+| **C — Core** | Read the method and evidence closely enough to explain the contribution and its assumptions |
+| **R — Reproduction** | Reimplement the central mechanism or reproduce one important phenomenon/result at small scale |
+
+For **H**, read the abstract/introduction and the historically important sections. For **C**, add the method, central equations, main experiments, and limitations. For **R**, connect the paper directly to the course project; reproducing one decisive mechanism or result is sufficient unless the project specifies otherwise.
 
 ---
 
@@ -225,6 +237,12 @@ Implement SGD, Momentum, RMSProp, and Adam and run them against the same objecti
 
 Prioritize search, heuristics, CSPs, minimax, alpha-beta, expectimax, Bayes nets, HMMs, particle filtering, MDPs, value iteration, and policy iteration. Treat basic ML material as preview only.
 
+#### Canonical readings
+
+| Type | Work | Summary & significance |
+|---|---|---|
+| H | [Turing (1950), *Computing Machinery and Intelligence*](https://doi.org/10.1093/mind/LIX.236.433) | Reframes “Can machines think?” as an operational test based on behavior. It is foundational to AI’s philosophical identity and worth reading to understand why evaluation has been part of the field from the beginning. |
+
 **Project — `05-08 classical-ai-lab`**  
 Build a small set of connected environments rather than four unrelated demos. Start with a grid-world supporting BFS, UCS, and A*, then add a small adversarial game with minimax/alpha-beta, a hidden-state tracking problem with Bayes/particle filtering, and finally a stochastic GridWorld with value and policy iteration. Preserve the same concepts of state, action, transition, observation, and utility across the projects so they become direct preparation for RL and robotics.
 
@@ -256,6 +274,14 @@ Using NumPy, implement linear regression with closed-form and gradient-descent s
 
 Study perceptrons, MLPs, nonlinear activations, approximation intuition, backpropagation, initialization, exploding/vanishing gradients, normalization, regularization, SGD/Adam, and residual connections.
 
+#### Canonical readings
+
+| Type | Work | Summary & significance |
+|---|---|---|
+| H | [McCulloch & Pitts (1943), *A Logical Calculus of the Ideas Immanent in Nervous Activity*](https://doi.org/10.1007/BF02478259) | Models neurons as logical threshold units and treats neural activity as computation. It is an early bridge between neuroscience, logic, and artificial neural networks; read it to see what modern neurons inherited from the original abstraction. |
+| H | [Rosenblatt (1958), *The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain*](https://doi.org/10.1037/h0042519) | Introduces a learnable decision unit, moving neural computation from fixed logic toward adaptation from data. Read it to understand the origin of trainable neural networks and the limits of linear separability. |
+| R | [Rumelhart, Hinton & Williams (1986), *Learning Representations by Back-Propagating Errors*](https://doi.org/10.1038/323533a0) | Shows how error gradients can train hidden representations in multilayer networks and helped establish backpropagation as the practical learning mechanism for neural networks. Read it alongside a manual implementation to connect the chain rule to representation learning. |
+
 **Project — `10-neural-nets-from-numpy`**  
 Implement a perceptron and a two-layer MLP in NumPy with manual backpropagation and softmax cross-entropy. Use AND, OR, XOR, and a small classification dataset to compare linear and nonlinear models, then test sigmoid/ReLU, weak/strong initialization, and increasing depth. The write-up should explain which failure motivated each architectural change.
 
@@ -279,12 +305,31 @@ Build the course framework progressively from tensor storage and a computation g
 
 Follow the course through linear classifiers, MLPs, normalization, CNNs, residual networks, Transformers for vision, self-supervision, and representative vision-language methods.
 
+#### Canonical readings
+
+| Type | Work | Summary & significance |
+|---|---|---|
+| H | [LeCun et al. (1998), *Gradient-Based Learning Applied to Document Recognition*](https://doi.org/10.1109/5.726791) | Demonstrates an end-to-end convolutional network for document recognition and consolidates convolution, weight sharing, and gradient learning into a successful system. Read it to understand CNNs before modern scale and compute changed the recipe. |
+| C | [Krizhevsky, Sutskever & Hinton (2012), *ImageNet Classification with Deep Convolutional Neural Networks*](https://proceedings.neurips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html) | Combines deep CNNs, GPUs, ReLU, dropout, and large-scale labeled data to achieve a decisive ImageNet result. It marks the modern deep-learning inflection point; read it to see how architecture, data, and compute converged. |
+| R | [He et al. (2015), *Deep Residual Learning for Image Recognition*](https://arxiv.org/abs/1512.03385) | Introduces residual blocks that make very deep networks substantially easier to optimize. Skip connections became a general architectural primitive well beyond vision; read it to understand why depth became practical. |
+| C | [Dosovitskiy et al. (2020), *An Image Is Worth 16×16 Words*](https://arxiv.org/abs/2010.11929) | Shows that a Transformer operating on image patches can rival strong CNNs when trained at sufficient scale. It marks attention’s expansion into vision and is useful for studying the trade-off between learned scale and handcrafted inductive bias. |
+
 **Project — `12-vision-evolution`**  
 On CIFAR-10 or a similar dataset, train a linear classifier, MLP, CNN, small ResNet, and small ViT under comparable conditions. Use the experiments to study residual optimization, receptive fields, augmentation, normalization, data scaling, and the differences between convolutional and attention-based inductive biases. End with a small CLIP-style contrastive image-text experiment.
 
 ### NLP-402 — Sequence Modeling
 
 Study n-gram language models, RNNs, LSTMs/GRUs, seq2seq, neural attention, and Transformers, using CS224N as the conceptual bridge between classical sequence models and modern language models.
+
+#### Canonical readings
+
+| Type | Work | Summary & significance |
+|---|---|---|
+| H | [Mikolov et al. (2013), *Distributed Representations of Words and Phrases and their Compositionality*](https://proceedings.neurips.cc/paper/2013/hash/9aa42b31882ec039965f3c4923ce901b-Abstract.html) | Develops efficient objectives for learning semantic word vectors at scale, including negative sampling. It helped make distributed representations a standard NLP primitive; read it before contextual embeddings to understand what they replaced. |
+| C | [Sutskever, Vinyals & Le (2014), *Sequence to Sequence Learning with Neural Networks*](https://arxiv.org/abs/1409.3215) | Uses an encoder-decoder LSTM to map variable-length sequences to variable-length outputs, making neural machine translation practical without task-specific pipelines. Read it to understand the fixed-context bottleneck that attention soon addressed. |
+| R | [Bahdanau, Cho & Bengio (2014), *Neural Machine Translation by Jointly Learning to Align and Translate*](https://arxiv.org/abs/1409.0473) | Introduces learned soft alignment so the decoder can attend to different encoder states instead of relying on one fixed vector. It is the direct conceptual bridge from recurrent seq2seq models to modern attention. |
+| R | [Vaswani et al. (2017), *Attention Is All You Need*](https://arxiv.org/abs/1706.03762) | Replaces recurrence with self-attention and establishes the Transformer, enabling highly parallel sequence modeling. It is the architectural foundation of modern LLMs and many multimodal models; nearly every later foundation-model paper assumes its ideas. |
+| C | [Devlin et al. (2018), *BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*](https://arxiv.org/abs/1810.04805) | Uses masked-language pretraining to learn deep bidirectional contextual representations, then fine-tunes them across NLP tasks. It established the pretrain-then-adapt paradigm for encoder models and provides an important contrast to autoregressive GPT-style models. |
 
 **Project — `13-sequence-evolution`**  
 Train a character n-gram model, vanilla RNN, LSTM/GRU, attention-based encoder-decoder, and small Transformer on the same or closely related dataset. Compare long-range dependency behavior, training speed, memory, and extrapolation to longer sequences. The final report should explain precisely what attention removes or changes relative to recurrence.
@@ -298,6 +343,14 @@ Train a character n-gram model, vanilla RNN, LSTM/GRU, attention-based encoder-d
 | RL-501 | Reinforcement Learning | [Stanford CS234 — Winter 2026](https://web.stanford.edu/class/cs234/) | Sutton & Barto, *Reinforcement Learning: An Introduction* | 10 weeks | `14-rl-lab` |
 
 Study bandits, MDPs, Bellman equations, dynamic programming, Monte Carlo, TD learning, Q-learning, function approximation, policy gradients, actor-critic, DQN, PPO, exploration, imitation learning, offline RL, introductory RLHF, and MCTS.
+
+#### Canonical readings
+
+| Type | Work | Summary & significance |
+|---|---|---|
+| R | [Mnih et al. (2015), *Human-level Control through Deep Reinforcement Learning*](https://doi.org/10.1038/nature14236) | Combines Q-learning with deep convolutional networks, experience replay, and a target network to learn Atari control from pixels. It is a landmark in deep RL and worth reproducing to understand why stabilization mechanisms are necessary. |
+| C | [Silver et al. (2016), *Mastering the Game of Go with Deep Neural Networks and Tree Search*](https://doi.org/10.1038/nature16961) | Combines policy networks, value networks, reinforcement learning, and Monte Carlo tree search into a superhuman Go system. Read it as a canonical example of learned models and explicit search working together rather than competing. |
+| R | [Schulman et al. (2017), *Proximal Policy Optimization Algorithms*](https://arxiv.org/abs/1707.06347) | Introduces a clipped surrogate objective that limits destructive policy updates while keeping the algorithm simple. PPO became a durable policy-optimization baseline and later influenced RLHF practice; read it for both the method and its engineering trade-offs. |
 
 **Project — `14-rl-lab`**  
 Implement tabular Q-learning, REINFORCE, actor-critic, DQN, and PPO in a common experiment harness. Run controlled tests over reward design, discount factor, exploration, learning rate, target-network updates, and batch size, using multiple random seeds whenever variance matters. The goal is to develop intuition for instability and evaluation rather than simply reach a benchmark score.
@@ -317,6 +370,16 @@ Implement tabular Q-learning, REINFORCE, actor-critic, DQN, and PPO in a common 
 
 Follow CS336 through tokenization, Transformer implementation, optimization, systems profiling, Triton/FlashAttention-style kernels, distributed execution, scaling laws, data filtering/deduplication, SFT, RLHF/RLVR, and selected multimodal material.
 
+#### Canonical readings
+
+| Type | Work | Summary & significance |
+|---|---|---|
+| C | [Brown et al. (2020), *Language Models are Few-Shot Learners*](https://arxiv.org/abs/2005.14165) | Shows that scaling an autoregressive Transformer can produce strong zero-, one-, and few-shot behavior through prompting alone. It marks the shift from task-specific fine-tuning toward general-purpose language models and in-context learning. |
+| R | [Kaplan et al. (2020), *Scaling Laws for Neural Language Models*](https://arxiv.org/abs/2001.08361) | Finds empirical power-law relationships between language-model loss, parameter count, data, and compute. The paper shaped the scaling era by making progress more predictable; read it to learn both scaling intuition and large-scale experimental methodology. |
+| C | [Hoffmann et al. (2022), *Training Compute-Optimal Large Language Models*](https://arxiv.org/abs/2203.15556) | Shows that many large language models were undertrained and that compute-optimal training requires substantially more data relative to model size. It corrected parameter-heavy scaling practice; read it to understand how model size and token budget should be traded off. |
+| R | [Ouyang et al. (2022), *Training Language Models to Follow Instructions with Human Feedback*](https://arxiv.org/abs/2203.02155) | Formalizes the modern assistant pipeline of supervised fine-tuning, preference data, reward modeling, and PPO-based RLHF. It is a key transition from capable base models to instruction-following assistants; read it to separate pretraining from alignment and post-training. |
+| C | [Rafailov et al. (2023), *Direct Preference Optimization: Your Language Model is Secretly a Reward Model*](https://arxiv.org/abs/2305.18290) | Derives a direct preference-learning objective that avoids training a separate reward model and running PPO. It simplified a major part of post-training practice; read it to compare RL-based and direct optimization views of preference alignment. |
+
 **Project — `15-mini-foundation-model`**  
 Build a BPE-style tokenizer and decoder-only Transformer, train a small LM, profile compute and memory bottlenecks, implement at least one optimized kernel, and train a small model family such as 5M → 15M → 50M → 100M+ parameters to produce basic scaling curves. Add a compact data pipeline with normalization, filtering, deduplication, tokenization, and clean train/validation separation, then compare a base model with SFT and one post-training method where compute permits.
 
@@ -324,7 +387,13 @@ Build a BPE-style tokenizer and decoder-only Transformer, train a small LM, prof
 
 Study representative modern components: RMSNorm, RoPE, SwiGLU, MQA/GQA, KV cache, FlashAttention, sparse MoE, routing/load balancing, long-context methods, and selected alternatives to standard attention. Use official model reports rather than broad secondary summaries whenever possible.
 
-Primary frontier reference: [Kimi K3 official repository and technical report](https://github.com/MoonshotAI/Kimi-K3).
+#### Canonical readings
+
+| Type | Work | Summary & significance |
+|---|---|---|
+| C | [Fedus, Zoph & Shazeer (2021), *Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity*](https://arxiv.org/abs/2101.03961) | Uses sparse mixture-of-experts routing so parameter count can grow without proportional per-token compute. It is a practical milestone for modern MoE systems; read it to understand routing, load balancing, capacity, and sparse scaling trade-offs. |
+| R | [Dao et al. (2022), *FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*](https://arxiv.org/abs/2205.14135) | Reorders exact attention computation to reduce expensive memory traffic rather than approximating attention itself. It is a landmark in hardware-aware ML algorithms; read it to see how memory hierarchy can reshape what model architectures are feasible. |
+| C | [Kimi Team (2026), *Kimi K3: Open Frontier Intelligence*](https://github.com/MoonshotAI/Kimi-K3/blob/main/k3_tech_report.pdf) | Combines modern MoE, attention, long-context, and multimodal design choices in a frontier-scale model. It is a contemporary synthesis rather than a historical milestone; read it as a case study in how current architectures balance capability, sparsity, memory, and training stability. |
 
 **Project — `16-k3-mini`**  
 Start from the dense Transformer built in FM-601 and add a small sparse MoE, one modern attention variant, a long-context synthetic benchmark, and one K3-inspired component that can be reproduced at small scale. Compare validation loss, training stability, active parameters per token, throughput, memory use, long-context behavior, and expert utilization. The report should connect every architectural change to the bottleneck it is intended to address and the cost it introduces.
@@ -342,12 +411,26 @@ Start from the dense Transformer built in FM-601 and add a small sparse MoE, one
 
 Study test-time compute, verifiers, search with language models, tool use, code execution, memory, planning, multi-step reasoning, self-improvement, agent evaluation, and robustness.
 
+#### Canonical readings
+
+| Type | Work | Summary & significance |
+|---|---|---|
+| R | [Yao et al. (2022), *ReAct: Synergizing Reasoning and Acting in Language Models*](https://arxiv.org/abs/2210.03629) | Interleaves reasoning traces with actions and observations so a language model can plan, use tools, and revise behavior from environment feedback. It became an influential agent pattern; read it to understand the move from static reasoning to closed-loop interaction. |
+| C | [Schick et al. (2023), *Toolformer: Language Models Can Teach Themselves to Use Tools*](https://arxiv.org/abs/2302.04761) | Shows how a language model can generate and filter its own API-call training examples, learning when and how to invoke external tools. It is an early bridge from standalone LMs to tool-augmented agents; read it to distinguish learned tool use from hand-written orchestration. |
+
 **Project — `17-agent-lab`**  
 Build an agent without using an orchestration framework as its core reasoning layer. The system should implement goal decomposition, tool selection, execution, observation, verification, and replanning over tools such as a filesystem, Python, a shell sandbox, local document search, and a unit-test runner. Evaluate it on ambiguous tasks, misleading outputs, unavailable tools, long horizons, conflicting evidence, context exhaustion, and verifier errors, reporting success rate, steps, tool calls, cost, and failure category.
 
 ### MM-702 — Multimodal Learning
 
 Study multimodal representation, alignment, reasoning, generation, transference, contrastive objectives, visual grounding, vision-language models, and multimodal Transformers.
+
+#### Canonical readings
+
+| Type | Work | Summary & significance |
+|---|---|---|
+| R | [Radford et al. (2021), *Learning Transferable Visual Models From Natural Language Supervision*](https://arxiv.org/abs/2103.00020) | Trains image and text encoders contrastively on large-scale image-text pairs and enables zero-shot visual classification through language prompts. CLIP helped establish natural language as an interface to visual representations and is foundational to modern vision-language models. |
+| C | [Alayrac et al. (2022), *Flamingo: a Visual Language Model for Few-Shot Learning*](https://arxiv.org/abs/2204.14198) | Connects pretrained vision and language models with a resampler and gated cross-attention to handle interleaved multimodal sequences. It is an important early VLM design; read it to see how large unimodal models can be composed rather than retrained from scratch. |
 
 **Project — `18-mini-vlm`**  
 Connect a vision encoder to a language model through a projection or adapter and train a small image-to-text or instruction-following system. Compare frozen and fine-tuned visual encoders, linear and MLP projections, different alignment objectives, and the effect of image resolution or visual-token budget. Reuse the visual foundations from CV-401 instead of retraining a large vision backbone from scratch.
@@ -361,6 +444,14 @@ Connect a vision encoder to a language model through a projection or adapter and
 | GEN-801 | Flow Matching and Diffusion Models | [MIT 6.S184 — 2026](https://diffusion.csail.mit.edu/) | 6 weeks | MATH-103, DL-301 | `19-flow-diffusion-lab` |
 
 Study ODE/SDE foundations, flow matching, score matching, classifier-free guidance, latent spaces, diffusion Transformers, and discrete diffusion at a level sufficient to understand modern generative policies.
+
+#### Canonical readings
+
+| Type | Work | Summary & significance |
+|---|---|---|
+| H | [Goodfellow et al. (2014), *Generative Adversarial Nets*](https://arxiv.org/abs/1406.2661) | Frames generation as a minimax game between a generator and discriminator, launching the GAN era of neural generative modeling. Read it for historical perspective on adversarial learning and to understand why later diffusion and flow methods solved different stability and coverage problems. |
+| R | [Ho, Jain & Abbeel (2020), *Denoising Diffusion Probabilistic Models*](https://arxiv.org/abs/2006.11239) | Turns gradual noising and learned denoising into a high-quality generative model with a simple training objective. It made diffusion a dominant generative paradigm; read it before flow matching to understand the stochastic formulation that later methods simplify or reinterpret. |
+| R | [Lipman et al. (2022), *Flow Matching for Generative Modeling*](https://arxiv.org/abs/2210.02747) | Trains continuous normalizing flows by directly regressing a vector field along chosen probability paths, avoiding simulation during training. It is important both for modern generative modeling and for flow-based robot action policies later in the curriculum. |
 
 **Project — `19-flow-diffusion-lab`**  
 Use one codebase to learn a 2D probability distribution, train a small image generative model, and finally model action sequences in a toy control problem. Compare deterministic regression, a Gaussian action head, and a flow-matching action head so that the project becomes a direct bridge from generative modeling to robot policy learning.
@@ -416,6 +507,13 @@ Build a simulated pick-and-place system whose pipeline runs from RGB/state obser
 
 Study behavioral cloning, DAgger, policy gradients, actor-critic, PPO, SAC, Q-learning, offline RL, model-based RL, goal-conditioned learning, skill discovery, and generative action prediction.
 
+#### Canonical readings
+
+| Type | Work | Summary & significance |
+|---|---|---|
+| R | [Ross, Gordon & Bagnell (2011), *A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning*](https://arxiv.org/abs/1011.0686) | Introduces DAgger, which repeatedly collects expert labels on states visited by the learner to reduce compounding distribution shift. It is a classic result for imitation learning and essential for understanding why behavior cloning often fails in closed-loop robotics. |
+| C | [Ha & Schmidhuber (2018), *World Models*](https://arxiv.org/abs/1803.10122) | Learns a compact latent dynamics model and uses it as an internal environment for control. It became an influential demonstration of model-based representation learning; read it to connect latent state, prediction, planning, and later world-model research. |
+
 **Project — `24-robot-learning`**  
 Use simulation to train policies for a progression such as reach → push → pick → place. On one selected task, compare a classical controller/planner, behavioral cloning, an RL method, and a generative or action-chunking policy under the same evaluation protocol. Report sample efficiency, robustness, generalization, stability, and failure recovery rather than only final success rate.
 
@@ -445,6 +543,16 @@ There is no single stable textbook for embodied foundation models. This stage is
 
 Study the progression from RT-style action representations through Open X-Embodiment, OpenVLA, flow-based action heads, π0/π0.5-style policies, cross-embodiment training, heterogeneous data mixtures, and long-horizon embodied reasoning. Focus on the design choices for visual representation, language conditioning, proprioception, action representation, action chunks, cross-embodiment transfer, real-time inference, and closed-loop correction.
 
+#### Canonical readings
+
+| Type | Work | Summary & significance |
+|---|---|---|
+| C | [Brohan et al. (2023), *RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control*](https://arxiv.org/abs/2307.15818) | Co-trains vision-language knowledge with robot trajectories and represents actions within a language-model-style output space. It is a turning point toward Vision-Language-Action models; read it to see how semantic web knowledge can transfer into physical control. |
+| C | [Open X-Embodiment Collaboration (2023), *Open X-Embodiment: Robotic Learning Datasets and RT-X Models*](https://arxiv.org/abs/2310.08864) | Pools heterogeneous robot data across many embodiments and studies models trained on that shared corpus. It shifted robot learning toward cross-embodiment scaling and generalist policies; read it to understand the data-standardization and transfer problems unique to robotics. |
+| R | [Kim et al. (2024), *OpenVLA: An Open-Source Vision-Language-Action Model*](https://arxiv.org/abs/2406.09246) | Provides an open VLA model, training recipe, adaptation path, and evaluation setup that make generalist robot policies inspectable. It is the most practical reproduction target in this lineage; read and implement it to move from VLA concepts to experimental research. |
+| C | [Physical Intelligence (2024), *π0: A Vision-Language-Action Flow Model for General Robot Control*](https://www.physicalintelligence.company/download/pi0.pdf) | Uses a flow-based action expert to generate continuous action chunks conditioned on multimodal context. It marks a shift from discrete action-token formulations toward expressive continuous action generation and directly links flow matching to robot control. |
+| C | [Physical Intelligence (2025), *π0.5: a Vision-Language-Action Model with Open-World Generalization*](https://arxiv.org/abs/2504.16054) | Extends the VLA approach with heterogeneous co-training aimed at broader task and environment generalization. Read it to study the emerging problem of open-world robot foundation models, where semantic understanding, diverse data, and continuous control must work together. |
+
 **Project — `25-mini-vla`**  
 Build a small VLA policy in simulation that maps camera images, language instructions, and robot state to an action or action chunk. Implement one simple action head and one generative action head such as flow matching, then evaluate generalization to object positions, object identities, colors, instruction paraphrases, distractors, and unseen layouts. Finish with a 6–10 page research-style report containing reproducible code, configuration files, an ablation table, a failure taxonomy, and one narrow research question that can be defended experimentally.
 
@@ -452,7 +560,7 @@ Build a small VLA policy in simulation that maps camera images, language instruc
 
 # 13. Research phase
 
-After the core curriculum, work becomes paper-driven rather than course-driven.
+After the core curriculum, work becomes paper-driven rather than course-driven. Revisit Turing (1950) once at this stage; the same text should read differently after building learning systems, agents, and embodied policies.
 
 ```text
 Read
@@ -499,34 +607,54 @@ Electives are taken only when a research question needs them.
 
 ---
 
-# Anchor papers
+# Canonical literature index
 
-Read one or two anchor works for each major conceptual leap instead of trying to read the entire history of the field.
+This index is a map, not a separate reading sequence. Read each work inside the course listed in the final column, after its prerequisites have been covered.
 
-| Topic | Anchor works |
-|---|---|
-| Neural networks | Perceptron; Backpropagation |
-| CNNs | AlexNet; ResNet |
-| Sequence models | LSTM |
-| Neural attention | Bahdanau et al. |
-| Transformers | *Attention Is All You Need* |
-| Vision Transformers | ViT |
-| Vision-language | CLIP |
-| Deep RL | DQN |
-| Policy optimization | PPO |
-| Scaling | OpenAI Scaling Laws; Chinchilla |
-| Sparse models | Switch Transformer + one modern MoE paper |
-| Alignment | InstructGPT; DPO |
-| Agents | ReAct + current CS329A readings |
-| Robot Transformers | RT-1; RT-2 |
-| Open VLA | OpenVLA |
-| Generalist robot models | π0; π0.5 |
-| Frontier LM architecture | Kimi K3 technical report |
+| Year | Type | Work | Course |
+|---:|:---:|---|---|
+| 1943 | H | [McCulloch & Pitts — *A Logical Calculus of the Ideas Immanent in Nervous Activity*](https://doi.org/10.1007/BF02478259) | DL-301 |
+| 1950 | H | [Turing — *Computing Machinery and Intelligence*](https://doi.org/10.1093/mind/LIX.236.433) | AI-101 |
+| 1958 | H | [Rosenblatt — *The Perceptron*](https://doi.org/10.1037/h0042519) | DL-301 |
+| 1986 | R | [Rumelhart, Hinton & Williams — *Learning Representations by Back-Propagating Errors*](https://doi.org/10.1038/323533a0) | DL-301 |
+| 1998 | H | [LeCun et al. — *Gradient-Based Learning Applied to Document Recognition*](https://doi.org/10.1109/5.726791) | CV-401 |
+| 2011 | R | [Ross, Gordon & Bagnell — *A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning*](https://arxiv.org/abs/1011.0686) | RRL-1001 |
+| 2012 | C | [Krizhevsky, Sutskever & Hinton — *ImageNet Classification with Deep Convolutional Neural Networks*](https://proceedings.neurips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html) | CV-401 |
+| 2013 | H | [Mikolov et al. — *Distributed Representations of Words and Phrases and their Compositionality*](https://proceedings.neurips.cc/paper/2013/hash/9aa42b31882ec039965f3c4923ce901b-Abstract.html) | NLP-402 |
+| 2014 | C | [Sutskever, Vinyals & Le — *Sequence to Sequence Learning with Neural Networks*](https://arxiv.org/abs/1409.3215) | NLP-402 |
+| 2014 | R | [Bahdanau, Cho & Bengio — *Neural Machine Translation by Jointly Learning to Align and Translate*](https://arxiv.org/abs/1409.0473) | NLP-402 |
+| 2014 | H | [Goodfellow et al. — *Generative Adversarial Nets*](https://arxiv.org/abs/1406.2661) | GEN-801 |
+| 2015 | R | [Mnih et al. — *Human-level Control through Deep Reinforcement Learning*](https://doi.org/10.1038/nature14236) | RL-501 |
+| 2015 | R | [He et al. — *Deep Residual Learning for Image Recognition*](https://arxiv.org/abs/1512.03385) | CV-401 |
+| 2016 | C | [Silver et al. — *Mastering the Game of Go with Deep Neural Networks and Tree Search*](https://doi.org/10.1038/nature16961) | RL-501 |
+| 2017 | R | [Vaswani et al. — *Attention Is All You Need*](https://arxiv.org/abs/1706.03762) | NLP-402 |
+| 2017 | R | [Schulman et al. — *Proximal Policy Optimization Algorithms*](https://arxiv.org/abs/1707.06347) | RL-501 |
+| 2018 | C | [Devlin et al. — *BERT*](https://arxiv.org/abs/1810.04805) | NLP-402 |
+| 2018 | C | [Ha & Schmidhuber — *World Models*](https://arxiv.org/abs/1803.10122) | RRL-1001 |
+| 2020 | C | [Brown et al. — *Language Models are Few-Shot Learners*](https://arxiv.org/abs/2005.14165) | FM-601 |
+| 2020 | R | [Kaplan et al. — *Scaling Laws for Neural Language Models*](https://arxiv.org/abs/2001.08361) | FM-601 |
+| 2020 | R | [Ho, Jain & Abbeel — *Denoising Diffusion Probabilistic Models*](https://arxiv.org/abs/2006.11239) | GEN-801 |
+| 2020 | C | [Dosovitskiy et al. — *An Image Is Worth 16×16 Words*](https://arxiv.org/abs/2010.11929) | CV-401 |
+| 2021 | C | [Fedus, Zoph & Shazeer — *Switch Transformers*](https://arxiv.org/abs/2101.03961) | FM-602 |
+| 2021 | R | [Radford et al. — *Learning Transferable Visual Models From Natural Language Supervision*](https://arxiv.org/abs/2103.00020) | MM-702 |
+| 2022 | C | [Hoffmann et al. — *Training Compute-Optimal Large Language Models*](https://arxiv.org/abs/2203.15556) | FM-601 |
+| 2022 | R | [Ouyang et al. — *Training Language Models to Follow Instructions with Human Feedback*](https://arxiv.org/abs/2203.02155) | FM-601 |
+| 2022 | R | [Dao et al. — *FlashAttention*](https://arxiv.org/abs/2205.14135) | FM-602 |
+| 2022 | C | [Alayrac et al. — *Flamingo*](https://arxiv.org/abs/2204.14198) | MM-702 |
+| 2022 | R | [Lipman et al. — *Flow Matching for Generative Modeling*](https://arxiv.org/abs/2210.02747) | GEN-801 |
+| 2022 | R | [Yao et al. — *ReAct*](https://arxiv.org/abs/2210.03629) | AG-701 |
+| 2023 | C | [Schick et al. — *Toolformer*](https://arxiv.org/abs/2302.04761) | AG-701 |
+| 2023 | C | [Rafailov et al. — *Direct Preference Optimization*](https://arxiv.org/abs/2305.18290) | FM-601 |
+| 2023 | C | [Brohan et al. — *RT-2*](https://arxiv.org/abs/2307.15818) | VLA-1101 |
+| 2023 | C | [Open X-Embodiment Collaboration — *Open X-Embodiment*](https://arxiv.org/abs/2310.08864) | VLA-1101 |
+| 2024 | R | [Kim et al. — *OpenVLA*](https://arxiv.org/abs/2406.09246) | VLA-1101 |
+| 2024 | C | [Physical Intelligence — *π0*](https://www.physicalintelligence.company/download/pi0.pdf) | VLA-1101 |
+| 2025 | C | [Physical Intelligence — *π0.5*](https://arxiv.org/abs/2504.16054) | VLA-1101 |
+| 2026 | C | [Kimi Team — *Kimi K3: Open Frontier Intelligence*](https://github.com/MoonshotAI/Kimi-K3/blob/main/k3_tech_report.pdf) | FM-602 |
 
-Read the abstract, introduction, main figure, method overview, experiments, and limitations first. On the second pass, derive the important equations, map the method to code, identify assumptions, and choose one reproduction target.
+The index should remain selective. Add a paper only when it represents a durable conceptual step, directly supports a core project, or becomes necessary for the research specialization. Fast-moving frontier readings should be refreshed when the relevant course begins rather than accumulated indefinitely.
 
 ---
-
 # Project standard
 
 Use one long-lived repository:
